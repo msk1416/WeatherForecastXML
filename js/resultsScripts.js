@@ -18,8 +18,16 @@ function setForecasts(fc, isFirstForecast) {
 
 function updateTable() {
     if (forecast1 && forecast2) {
+        //run xpath and xslt against xmlDoc element
+        var xmlDoc = document.implementation.createDocument(null, "forecasts");
+        xmlDoc.documentElement.append(forecast1.documentElement.cloneNode(true));
+        xmlDoc.documentElement.append(forecast2.documentElement.cloneNode(true));
+
+        applyStyles(xmlDoc);
+
         $('#resultsTable')[0].style.display = 'block';
 
+        /*
         $("#city1Name")[0].innerHTML = forecast1.firstChild.childNodes[0].getAttribute("name");
         $("#city2Name")[0].innerHTML = forecast2.firstChild.childNodes[0].getAttribute("name");
 
@@ -38,27 +46,20 @@ function updateTable() {
 
         $("#city1Sky")[0].innerHTML = forecast1.firstChild.childNodes[8].getAttribute("value");
         $("#city2Sky")[0].innerHTML = forecast1.firstChild.childNodes[8].getAttribute("value");
-        /*
-        //run xpath and xslt against xmlDoc element
-        var xmlDoc = document.implementation.createDocument(null, "forecasts");
-        xmlDoc.documentElement.append(forecast1.documentElement);
-        xmlDoc.documentElement.append(forecast2.documentElement);
+
+
         */
     }
 }
 
 
 function applyStyles(xml) {
-    var txt = "";
-    path = "/bookstore/book/price[text()]";
-    if (xml.evaluate) {
-        var nodes = xml.evaluate(path, xml, null, XPathResult.ANY_TYPE, null);
-        var result = nodes.iterateNext();
-        while (result) {
-            txt += result.childNodes[0].nodeValue + "<br>";
-            result = nodes.iterateNext();
+    var xsl = document.implementation.createDocument("","",null);
+    $(xsl).load("../xml/table_template.xsl");
 
-        }
-    }
-    document.getElementById("demo").innerHTML = txt;
+    xsltProcessor = new XSLTProcessor();
+    xsltProcessor.importStylesheet(xsl);
+    resultDocument = xsltProcessor.transformToFragment(xml, document);
+    document.getElementById("compareResults").appendChild(resultDocument);
+
 }
