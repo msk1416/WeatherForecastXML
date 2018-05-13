@@ -8,6 +8,21 @@ var forecast2;
 var city1;
 var city2;
 var currentXML;
+$(document).ready(function() { 
+	$("#city1").on('keyup', function (e) {
+	    if (e.keyCode == 13) {
+	        $("#btnCompare").trigger("click");
+	    }
+	});
+	$("#city2").on('keyup', function (e) {
+	    if (e.keyCode == 13) {
+	        $("#btnCompare").trigger("click");
+	    }
+	});
+});
+
+
+
 function setForecasts(fc, isFirstForecast) {
     if (isFirstForecast) {
         forecast1 = fc;
@@ -83,4 +98,3 @@ function saveXMLFile() {
         }, 0); 
     }
 }
-
