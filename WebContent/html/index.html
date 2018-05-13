@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="js/api_caller.js"></script>
+    <script type="text/javascript" src="js/resultsScripts.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <title>Weather comparing</title>
+    <style>
+        .input-group {
+            width: 20%;
+        }
+
+    </style>
+</head>
+<body>
+<div id="inputForm" style="padding: 10px;">
+    <div class="input-group mb-2">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-city1">City 1</span>
+        </div>
+        <input type="text" id="city1" class="form-control" aria-label="City 1" aria-describedby="inputGroup-sizing-default">
+    </div>
+    <div class="input-group mb-2">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-city2">City 2</span>
+        </div>
+        <input type="text" id="city2" class="form-control" aria-label="City 2" aria-describedby="inputGroup-sizing-default">
+    </div>
+    <button type="button" class="btn btn-dark" id="btnCompare" onclick="callForecastApi($('#city1')[0].value, $('#city2')[0].value); ">Compare</button>
+</div>
+<div id="compareResults"></div>
+</body>
+</html>
