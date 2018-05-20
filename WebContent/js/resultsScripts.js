@@ -36,35 +36,17 @@ function updateTable() {
     if (forecast1 && forecast2) {
         //run xpath and xslt against xmlDoc element
         var xmlDoc = document.implementation.createDocument(null, "forecasts");
+        xmlDoc.documentElement.setAttribute("xmlns", "http://www.w3schools.com/RedsDevils/WeatherXML");
+        xmlDoc.documentElement.setAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
+        xmlDoc.documentElement.setAttribute("xsi:schemaLocation", "http://www.w3schools.com/RedsDevils/WeatherXML ../xml/schema.xsd");
         xmlDoc.documentElement.append(forecast1.documentElement.cloneNode(true));
         xmlDoc.documentElement.append(forecast2.documentElement.cloneNode(true));
         currentXML = xmlDoc;
+        //validateXMLAgainstSchema(xmlDoc);
+        $.post(document.URL + "ValidateXML", { xml: getXMLFullText(currentXML) } );
         applyStyles(xmlDoc);
 
         $('#resultsTable')[0].style.display = 'table';
-
-        /*
-        $("#city1Name")[0].innerHTML = forecast1.firstChild.childNodes[0].getAttribute("name");
-        $("#city2Name")[0].innerHTML = forecast2.firstChild.childNodes[0].getAttribute("name");
-
-        min = forecast1.firstChild.childNodes[1].getAttribute("min");
-        max = forecast1.firstChild.childNodes[1].getAttribute("max");
-        temp = forecast1.firstChild.childNodes[1].getAttribute("value");
-        $("#city1Temp")[0].innerHTML = temp + " ºC (" + min + "º min./" + max + "º max.)";
-
-        min = forecast2.firstChild.childNodes[1].getAttribute("min");
-        max = forecast2.firstChild.childNodes[1].getAttribute("max");
-        temp = forecast2.firstChild.childNodes[1].getAttribute("value");
-        $("#city2Temp")[0].innerHTML = temp + " ºC (" + min + "º min./" + max + "º max.)";
-
-        $("#city1Humid")[0].innerHTML = forecast1.firstChild.childNodes[2].getAttribute("value") + "%";
-        $("#city2Humid")[0].innerHTML = forecast2.firstChild.childNodes[2].getAttribute("value") + "%";
-
-        $("#city1Sky")[0].innerHTML = forecast1.firstChild.childNodes[8].getAttribute("value");
-        $("#city2Sky")[0].innerHTML = forecast1.firstChild.childNodes[8].getAttribute("value");
-
-
-        */
     }
 }
 
@@ -82,7 +64,7 @@ function applyStyles(xml) {
 }
 
 function saveXMLFile() {
-    var file = new Blob(["<forecasts>" + currentXML.documentElement.innerHTML + "</forecasts>"], {type: "text/xml"});
+	var file = new Blob([getXMLFullText(currentXML)], {type: "text/xml"});
     if (window.navigator.msSaveOrOpenBlob) // IE10+
         window.navigator.msSaveOrOpenBlob(file, filename);
     else { // Others
@@ -97,4 +79,12 @@ function saveXMLFile() {
             window.URL.revokeObjectURL(url);  
         }, 0); 
     }
+}
+
+function getXMLFullText(xml) {
+	var xmlHeader = '<?xml version="1.0" encoding="UTF-8"?><forecasts xmlns="http://www.w3schools.com/RedsDevils/WeatherXML" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.w3schools.com/RedsDevils/WeatherXML ../xml/schema.xsd">';
+	return xmlHeader + xml.documentElement.innerHTML + "</forecasts>";
+}
+function validate(xml) {
+	
 }
