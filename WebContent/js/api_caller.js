@@ -29,7 +29,7 @@ function getXMLForecast(city, isFirst) {
             updateTable();
         },
         error: function(data) {
-            alert("One of inserted cities could not be found.");
+            alert("There has been an error with request. Maybe a network issue or a non-existent city.");
         }
     });
 }
