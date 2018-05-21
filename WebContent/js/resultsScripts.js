@@ -43,7 +43,7 @@ function updateTable() {
         xmlDoc.documentElement.append(forecast2.documentElement.cloneNode(true));
         currentXML = xmlDoc;
         //validateXMLAgainstSchema(xmlDoc);
-        $.post(document.URL + "ValidateXML", { xml: getXMLFullText(currentXML) } );
+        validate(currentXML);
         applyStyles(xmlDoc);
 
         $('#resultsTable')[0].style.display = 'table';
@@ -82,9 +82,15 @@ function saveXMLFile() {
 }
 
 function getXMLFullText(xml) {
-	var xmlHeader = '<?xml version="1.0" encoding="UTF-8"?><forecasts xmlns="http://www.w3schools.com/RedsDevils/WeatherXML" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.w3schools.com/RedsDevils/WeatherXML ../xml/schema.xsd">';
+	var xmlHeader = '<?xml version="1.0" encoding="UTF-8"?><forecasts xmlns="http://www.w3schools.com/RedsDevils/WeatherXML" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">';
 	return xmlHeader + xml.documentElement.innerHTML + "</forecasts>";
 }
 function validate(xml) {
-	
+    var res = $.post("/WeatherComp/XMLValidationServlet", { xml: getXMLFullText(xml) }, function(responseText) {
+    	if(responseText != "valid") {
+    		alert("Some error happened while validating the xml file.");
+    	} else {
+    		console.log("XML file has been successfully validated.");
+    	}
+    } );
 }

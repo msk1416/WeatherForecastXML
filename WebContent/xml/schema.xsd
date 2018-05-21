@@ -15,7 +15,7 @@
                     <xs:element name="coord">
                       <xs:complexType>
                         <xs:attribute name="lat" use="required" type="xs:decimal"/>
-                        <xs:attribute name="lon" use="required" type="xs:date"/>
+                        <xs:attribute name="lon" use="required" type="xs:decimal"/>
                       </xs:complexType>
                     </xs:element>
                     <xs:element name="country" type="xs:NCName"/>
