@@ -91,7 +91,8 @@ function validate(xml) {
     	if(responseText != "valid") {
     		alert("Some error happened while validating the xml file.");
     	} else {
-    		console.log("XML file has been successfully validated.");
+    		console.log("%cXML file has been successfully validated.", "color: green;");
+
     	}
     } );
 }

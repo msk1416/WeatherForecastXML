@@ -22,6 +22,7 @@ import org.xml.sax.XMLReader;
 
 /**
  * Servlet implementation class XMLValidationServlet
+ * @author sergi
  */
 @WebServlet("/XMLValidationServlet")
 public class XMLValidationServlet extends HttpServlet {
@@ -34,8 +35,10 @@ public class XMLValidationServlet extends HttpServlet {
 
 	static final String JAXP_SCHEMA_SOURCE =
 	        "http://java.sun.com/xml/jaxp/properties/schemaSource";
+	
 	static final String XSD_FILE_SOURCE = 
 			"C:\\Users\\sergi\\git\\WeatherForecastXML\\WebContent\\xml\\schema.xsd";
+	
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -43,15 +46,12 @@ public class XMLValidationServlet extends HttpServlet {
      */
     public XMLValidationServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		System.out.println("The request arrived to the servlet.");
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -59,8 +59,6 @@ public class XMLValidationServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("The request arrived to the servlet.");
-//		System.out.println("XML: " + request.getParameter("xml"));
 		String xmlContent = request.getParameter("xml");
 		SAXParserFactory spf = SAXParserFactory.newInstance();
 		spf.setNamespaceAware(true);
@@ -78,21 +76,18 @@ public class XMLValidationServlet extends HttpServlet {
 			parser.setProperty(JAXP_SCHEMA_SOURCE, new File(XSD_FILE_SOURCE));
 			XMLReader reader = parser.getXMLReader();
 			reader.parse(new InputSource(tmp.getAbsolutePath()));
-			
+			response.getOutputStream().write("valid".getBytes());
 		} catch (ParserConfigurationException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SAXNotRecognizedException x){
 	        System.err.println("Error: JAXP SAXParser property not recognized: "
                     + JAXP_SCHEMA_LANGUAGE);
 			 System.err.println( "Check to see if parser conforms to the JAXP spec.");
 		} catch (SAXException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			if (tmp != null)
 				tmp.delete();
-			response.getOutputStream().write("valid".getBytes());
 		}
 		System.out.println("XML has been validated successfully without errors.");
 	}
