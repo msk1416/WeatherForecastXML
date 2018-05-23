@@ -7,6 +7,7 @@
                 <tr>
                     <th scope="col"> </th>
                     <th scope="col" id="city1Name">
+                    	
                         <xsl:value-of select="string(//wd:current[1]/wd:city/@name)"/>, <xsl:value-of select="//wd:current[1]/wd:city/wd:country"/>
                     </th>
                     <th scope="col" id="city2Name">
@@ -28,7 +29,7 @@
                 </xsl:for-each>
             </tr>
             <tr>
-                <th scope="row">Sky</th>
+                <th scope="row">Forecast</th>
                 <xsl:for-each select="//wd:current/wd:weather">
                     <td> <xsl:value-of select="string(@value)" /> <img src="http://openweathermap.org/img/w/{string(@icon)}.png"/> </td>
                 </xsl:for-each>
