@@ -1,4 +1,3 @@
-
 function callForecastApi(city1, city2) {
     getXMLForecast(city1, true);
     getXMLForecast(city2, false);
@@ -8,6 +7,7 @@ var forecast2;
 var city1;
 var city2;
 var currentXML;
+
 $(document).ready(function() { 
 	$("#city1").on('keyup', function (e) {
 	    if (e.keyCode == 13) {
@@ -42,7 +42,6 @@ function updateTable() {
         xmlDoc.documentElement.append(forecast1.documentElement.cloneNode(true));
         xmlDoc.documentElement.append(forecast2.documentElement.cloneNode(true));
         currentXML = xmlDoc;
-        //validateXMLAgainstSchema(xmlDoc);
         validate(currentXML);
         applyStyles(xmlDoc);
 
@@ -71,7 +70,8 @@ function saveXMLFile() {
         var a = document.createElement("a"),
                 url = URL.createObjectURL(file);
         a.href = url;
-        a.download = $("#city1Name")[0].innerHTML + "_" + $("#city2Name")[0].innerHTML + ".xml";
+        var filename = $("#city1Name")[0].innerHTML + "_" + $("#city2Name")[0].innerHTML + ".xml";
+        a.download = filename.split(' ').join('');
         document.body.appendChild(a);
         a.click();
         setTimeout(function() {
@@ -85,6 +85,7 @@ function getXMLFullText(xml) {
 	var xmlHeader = '<?xml version="1.0" encoding="UTF-8"?><forecasts xmlns="http://www.w3schools.com/RedsDevils/WeatherXML" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">';
 	return xmlHeader + xml.documentElement.innerHTML + "</forecasts>";
 }
+
 function validate(xml) {
     var res = $.post("/WeatherComp/XMLValidationServlet", { xml: getXMLFullText(xml) }, function(responseText) {
     	if(responseText != "valid") {
