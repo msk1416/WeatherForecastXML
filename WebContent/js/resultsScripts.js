@@ -40,9 +40,9 @@ function updateTable() {
     if (forecast1 && forecast2) {
         //run xpath and xslt against xmlDoc element
         var xmlDoc = document.implementation.createDocument(null, "forecasts");
-        xmlDoc.documentElement.setAttribute("xmlns", "http://www.w3schools.com/RedsDevils/WeatherXML");
+        xmlDoc.documentElement.setAttribute("xmlns", "http://www.w3schools.com/WeatherXML");
         xmlDoc.documentElement.setAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
-        xmlDoc.documentElement.setAttribute("xsi:schemaLocation", "http://www.w3schools.com/RedsDevils/WeatherXML ../xml/schema.xsd");
+        xmlDoc.documentElement.setAttribute("xsi:schemaLocation", "http://www.w3schools.com/WeatherXML ../xml/schema.xsd");
         xmlDoc.documentElement.append(forecast1.documentElement.cloneNode(true));
         xmlDoc.documentElement.append(forecast2.documentElement.cloneNode(true));
         currentXML = xmlDoc;
@@ -86,7 +86,7 @@ function saveXMLFile() {
 }
 
 function getXMLFullText(xml) {
-	var xmlHeader = '<?xml version="1.0" encoding="UTF-8"?><forecasts xmlns="http://www.w3schools.com/RedsDevils/WeatherXML" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">';
+	var xmlHeader = '<?xml version="1.0" encoding="UTF-8"?><forecasts xmlns="http://www.w3schools.com/WeatherXML" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">';
 	return xmlHeader + xml.documentElement.innerHTML + "</forecasts>";
 }
 

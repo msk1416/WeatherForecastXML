@@ -1,5 +1,5 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
-    xmlns:wd="http://www.w3schools.com/RedsDevils/WeatherXML">
+    xmlns:wd="http://www.w3schools.com/WeatherXML">
 
     <xsl:template match="wd:forecasts">
         <table class="table" id="resultsTable" style="width: 65%;">
