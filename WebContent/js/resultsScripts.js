@@ -1,4 +1,5 @@
 function callForecastApi(city1, city2) {
+	resetForecasts();
     getXMLForecast(city1, true);
     getXMLForecast(city2, false);
 }
@@ -21,7 +22,10 @@ $(document).ready(function() {
 	});
 });
 
-
+function resetForecasts(){
+	forecast1 = null;
+	forecast2 = null;
+}
 
 function setForecasts(fc, isFirstForecast) {
     if (isFirstForecast) {
