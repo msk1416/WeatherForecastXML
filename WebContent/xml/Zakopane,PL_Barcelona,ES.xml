@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<forecasts xmlns="http://www.w3schools.com/WeatherXML" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <current>
+        <city id="3080866" name="Zakopane">
+            <coord lon="19.95" lat="49.3" />
+            <country>PL</country>
+            <sun rise="2018-05-28T02:42:22" set="2018-05-28T18:33:17" />
+        </city>
+        <temperature value="16.64" min="16.64" max="16.64" unit="metric" />
+        <humidity value="92" unit="%" />
+        <pressure value="923.77" unit="hPa" />
+        <wind>
+            <speed value="1.36" name="Calm" />
+            <gusts />
+            <direction value="71.5" code="ENE" name="East-northeast" />
+        </wind>
+        <clouds value="0" name="clear sky" />
+        <visibility />
+        <precipitation mode="no" />
+        <weather number="800" value="clear sky" icon="01d" />
+        <lastupdate value="2018-05-28T06:16:53" />
+    </current>
+    <current>
+        <city id="3128760" name="Barcelona">
+            <coord lon="2.18" lat="41.38" />
+            <country>ES</country>
+            <sun rise="2018-05-28T04:22:17" set="2018-05-28T19:15:20" />
+        </city>
+        <temperature value="17.49" min="17.49" max="17.49" unit="metric" />
+        <humidity value="100" unit="%" />
+        <pressure value="1018.45" unit="hPa" />
+        <wind>
+            <speed value="1.61" name="Light breeze" />
+            <gusts />
+            <direction value="28.5" code="NNE" name="North-northeast" />
+        </wind>
+        <clouds value="48" name="scattered clouds" />
+        <visibility />
+        <precipitation value="0.27" mode="rain" unit="3h" />
+        <weather number="500" value="light rain" icon="10d" />
+        <lastupdate value="2018-05-28T06:16:26" />
+    </current>
+</forecasts>
