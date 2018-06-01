@@ -16,19 +16,21 @@
 </head>
 <body>
 <div id="inputForm" style="padding: 10px;">
-    <div class="input-group mb-2">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroup-sizing-city1">City 1</span>
-        </div>
-        <input type="text" id="city1" class="form-control" aria-label="City 1" aria-describedby="inputGroup-sizing-default">
-    </div>
-    <div class="input-group mb-2">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroup-sizing-city2">City 2</span>
-        </div>
-        <input type="text" id="city2" class="form-control" aria-label="City 2" aria-describedby="inputGroup-sizing-default">
-    </div>
-    <button type="button" class="btn btn-dark" id="btnCompare" onclick="callForecastApi($('#city1')[0].value, $('#city2')[0].value); ">Compare</button>
+	<form action="#" method="get" onsubmit="callForecastApi($('#city1')[0].value, $('#city2')[0].value); return false;">
+	    <div class="input-group mb-2">
+	        <div class="input-group-prepend">
+	            <span class="input-group-text" id="inputGroup-sizing-city1">City 1</span>
+	        </div>
+	        <input type="text" id="city1" class="form-control" aria-label="City 1" aria-describedby="inputGroup-sizing-default" required>
+	    </div>
+	    <div class="input-group mb-2">
+	        <div class="input-group-prepend">
+	            <span class="input-group-text" id="inputGroup-sizing-city2">City 2</span>
+	        </div>
+	        <input type="text" id="city2" class="form-control" aria-label="City 2" aria-describedby="inputGroup-sizing-default" required>
+	    </div>
+	    <input type="submit" class="btn btn-dark" id="btnCompare" value="Compare"/>
+    </form>
 </div>
 <div id="compareResults"></div>
 </body>
