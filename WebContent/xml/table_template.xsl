@@ -8,10 +8,10 @@
                     <th scope="col"> </th>
                     <th scope="col" id="city1Name">
                     	
-                        <xsl:value-of select="string(//wd:current[1]/wd:city/@name)"/>, <xsl:value-of select="//wd:current[1]/wd:city/wd:country"/>
+                        <xsl:value-of select="//wd:current[1]/wd:city/@name"/>, <xsl:value-of select="//wd:current[1]/wd:city/wd:country"/>
                     </th>
                     <th scope="col" id="city2Name">
-                        <xsl:value-of select="string(//wd:current[2]/wd:city/@name)"/>, <xsl:value-of select="//wd:current[2]/wd:city/wd:country"/>
+                        <xsl:value-of select="//wd:current[2]/wd:city/@name"/>, <xsl:value-of select="//wd:current[2]/wd:city/wd:country"/>
                     </th>
                 </tr>
             </thead>
@@ -19,19 +19,19 @@
             <tr>
                 <th scope="row">Temperature</th>
                 <xsl:for-each select="//wd:current/wd:temperature">
-                    <td> <xsl:value-of select="string(@value)" />ºC (<xsl:value-of select="string(@min)" />º min./<xsl:value-of select="string(@max)" />º max.) </td>
+                    <td> <xsl:value-of select="@value" />ºC (<xsl:value-of select="@min" />º min./<xsl:value-of select="@max" />º max.) </td>
                 </xsl:for-each>
             </tr>
             <tr>
                 <th scope="row">Humidity</th>
                 <xsl:for-each select="//wd:current/wd:humidity">
-                    <td> <xsl:value-of select="string(@value)" />% </td>
+                    <td> <xsl:value-of select="@value" />% </td>
                 </xsl:for-each>
             </tr>
             <tr>
                 <th scope="row">Forecast</th>
                 <xsl:for-each select="//wd:current/wd:weather">
-                    <td> <xsl:value-of select="string(@value)" /> <img src="http://openweathermap.org/img/w/{string(@icon)}.png"/> </td>
+                    <td> <xsl:value-of select="@value" /> <img src="http://openweathermap.org/img/w/{@icon}.png"/> </td>
                 </xsl:for-each>
             </tr>
         </table>
