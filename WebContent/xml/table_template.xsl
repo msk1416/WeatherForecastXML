@@ -6,13 +6,12 @@
             <thead class="thead-dark">
                 <tr>
                     <th scope="col"> </th>
-                    <th scope="col" id="city1Name">
-                    	
-                        <xsl:value-of select="//wd:current[1]/wd:city/@name"/>, <xsl:value-of select="//wd:current[1]/wd:city/wd:country"/>
-                    </th>
-                    <th scope="col" id="city2Name">
-                        <xsl:value-of select="//wd:current[2]/wd:city/@name"/>, <xsl:value-of select="//wd:current[2]/wd:city/wd:country"/>
-                    </th>
+                    <xsl:for-each select="//wd:current/wd:city">
+	                    <th scope="col">
+	                        <xsl:value-of select="@name"/>, <xsl:value-of select="wd:country"/>
+	                    </th>
+                    </xsl:for-each>
+                    
                 </tr>
             </thead>
 

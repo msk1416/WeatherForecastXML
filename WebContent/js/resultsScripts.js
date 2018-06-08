@@ -74,7 +74,9 @@ function saveXMLFile() {
         var a = document.createElement("a"),
                 url = URL.createObjectURL(file);
         a.href = url;
-        var filename = $("#city1Name")[0].innerHTML + "_" + $("#city2Name")[0].innerHTML + ".xml";
+        city1 = forecast1.children[0].querySelector("city").getAttribute("name");
+        city2 = forecast2.children[0].querySelector("city").getAttribute("name");
+        var filename = city1 + "_" + city2 + ".xml";
         a.download = filename.split(' ').join('');
         document.body.appendChild(a);
         a.click();
