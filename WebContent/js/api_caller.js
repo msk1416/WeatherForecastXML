@@ -3,9 +3,15 @@ var APPID = '43398a1072dabcf216413b65510d9e8e';
 var api_url;
 
 function getXMLForecast(city, isFirst) {
-    api_url = 'http://api.openweathermap.org/data/2.5/weather?q=' + city + '&mode=xml&units=metric&appid=' + APPID;
+    api_url = 'http://api.openweathermap.org/data/2.5/weather';
     $.ajax({
         url: api_url,
+        data: {
+        	q: city,
+        	mode: "xml",
+        	units: "metric",
+        	appid: APPID,
+        },
         type: 'GET',
         success: function(data){
             setForecasts(data, isFirst);
