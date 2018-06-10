@@ -21,7 +21,7 @@
                     <xs:element name="country" type="xs:NCName"/>
                     <xs:element name="sun">
                       <xs:complexType>
-                        <xs:attribute name="rise" use="required" type="xs:dateTime"/>
+                        <xs:attribute name="rise" use="required" type="xs:decimal"/>
                         <xs:attribute name="set" use="required" type="xs:dateTime"/>
                       </xs:complexType>
                     </xs:element>
