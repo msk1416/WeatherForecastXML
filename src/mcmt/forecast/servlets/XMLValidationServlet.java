@@ -14,10 +14,11 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
-
+import org.xml.sax.ErrorHandler;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXNotRecognizedException;
+import org.xml.sax.SAXParseException;
 import org.xml.sax.XMLReader;
 
 /**
@@ -59,24 +60,50 @@ public class XMLValidationServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//configure parser
 		String xmlContent = request.getParameter("xml");
 		SAXParserFactory spf = SAXParserFactory.newInstance();
 		spf.setNamespaceAware(true);
 		spf.setValidating(true);
 		File tmp = null;
 		try {
+			//generate random highly-unique name for temporary file
 			Random r = new Random(50000000);
 			tmp = new File("tmpXmlForecast" + r.nextInt() + "_tmp.xml");
+			//write file
 			PrintWriter writer = new PrintWriter(tmp);
 			writer.print(xmlContent);
 			writer.close();
-			
+			//load parser
 			SAXParser parser = spf.newSAXParser();
 			parser.setProperty(JAXP_SCHEMA_LANGUAGE, W3C_XML_SCHEMA);
 			parser.setProperty(JAXP_SCHEMA_SOURCE, new File(XSD_FILE_SOURCE));
 			XMLReader reader = parser.getXMLReader();
+			reader.setErrorHandler(new ErrorHandler() {
+				
+				@Override
+				public void warning(SAXParseException exception) throws SAXException {
+					System.out.println("WARNING validating");
+					
+				}
+				
+				@Override
+				public void fatalError(SAXParseException exception) throws SAXException {
+					System.out.println("FATAL ERROR validating");
+					throw exception;
+				}
+				
+				@Override
+				public void error(SAXParseException exception) throws SAXException {
+					System.out.println("ERROR validating");
+					throw exception;
+				}
+			});
+			//parse
 			reader.parse(new InputSource(tmp.getAbsolutePath()));
+			//if no exceptions write "valid" into response
 			response.getOutputStream().write("valid".getBytes());
+			System.out.println("XML has been validated successfully without errors.");
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();
 		} catch (SAXNotRecognizedException x){
@@ -87,9 +114,9 @@ public class XMLValidationServlet extends HttpServlet {
 			e.printStackTrace();
 		} finally {
 			if (tmp != null)
-				tmp.delete();
+				tmp.delete();				
 		}
-		System.out.println("XML has been validated successfully without errors.");
+		
 	}
 
 }
