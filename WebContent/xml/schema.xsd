@@ -18,7 +18,7 @@
                         <xs:attribute name="lon" use="required" type="xs:decimal"/>
                       </xs:complexType>
                     </xs:element>
-                    <xs:element name="country" type="xs:NCName"/>
+                    <xs:element name="country" type="xs:string"/>
                     <xs:element name="sun">
                       <xs:complexType>
                         <xs:attribute name="rise" use="required" type="xs:dateTime"/>
@@ -27,27 +27,27 @@
                     </xs:element>
                   </xs:sequence>
                   <xs:attribute name="id" use="required" type="xs:integer"/>
-                  <xs:attribute name="name" use="required" type="xs:NCName"/>
+                  <xs:attribute name="name" use="required" type="xs:string"/>
                 </xs:complexType>
               </xs:element>
               <xs:element name="temperature">
                 <xs:complexType>
                   <xs:attribute name="max" use="required" type="xs:decimal"/>
                   <xs:attribute name="min" use="required" type="xs:decimal"/>
-                  <xs:attribute name="unit" use="required" type="xs:NCName"/>
+                  <xs:attribute name="unit" use="required" type="xs:string"/>
                   <xs:attribute name="value" use="required" type="xs:decimal"/>
                 </xs:complexType>
               </xs:element>
               <xs:element name="humidity">
                 <xs:complexType>
                   <xs:attribute name="unit" use="required"/>
-                  <xs:attribute name="value" use="required" type="xs:integer"/>
+                  <xs:attribute name="value" use="required" type="xs:decimal"/>
                 </xs:complexType>
               </xs:element>
               <xs:element name="pressure">
                 <xs:complexType>
-                  <xs:attribute name="unit" use="required" type="xs:NCName"/>
-                  <xs:attribute name="value" use="required" type="xs:integer"/>
+                  <xs:attribute name="unit" use="required" type="xs:string"/>
+                  <xs:attribute name="value" use="required" type="xs:decimal"/>
                 </xs:complexType>
               </xs:element>
               <xs:element name="wind">
@@ -59,12 +59,16 @@
                         <xs:attribute name="value" use="required" type="xs:decimal"/>
                       </xs:complexType>
                     </xs:element>
-                    <xs:element name="gusts" type="xs:string" />
+                    <xs:element name="gusts">
+                    	<xs:complexType>
+                    		<xs:attribute name="value" type="xs:decimal"/>
+                    	</xs:complexType>
+                    </xs:element>
                     <xs:element name="direction">
                       <xs:complexType>
-                        <xs:attribute name="code" use="required" type="xs:NCName"/>
-                        <xs:attribute name="name" use="required" type="xs:NCName"/>
-                        <xs:attribute name="value" use="required" type="xs:integer"/>
+                        <xs:attribute name="code" use="required" type="xs:string"/>
+                        <xs:attribute name="name" use="required" type="xs:string"/>
+                        <xs:attribute name="value" use="required" type="xs:decimal"/>
                       </xs:complexType>
                     </xs:element>
                   </xs:sequence>
@@ -73,17 +77,19 @@
               <xs:element name="clouds">
                 <xs:complexType>
                   <xs:attribute name="name" use="required"/>
-                  <xs:attribute name="value" use="required" type="xs:integer"/>
+                  <xs:attribute name="value" use="required" type="xs:decimal"/>
                 </xs:complexType>
               </xs:element>
               <xs:element name="visibility">
                 <xs:complexType>
-                  <xs:attribute name="value" use="required" type="xs:integer"/>
+                  <xs:attribute name="value" type="xs:decimal"/>
                 </xs:complexType>
               </xs:element>
               <xs:element name="precipitation">
                 <xs:complexType>
-                  <xs:attribute name="mode" use="required" type="xs:NCName"/>
+                  <xs:attribute name="mode" type="xs:string"/>
+                  <xs:attribute name="value" type="xs:decimal"/>
+                  <xs:attribute name="unit" type="xs:string"/>
                 </xs:complexType>
               </xs:element>
               <xs:element name="weather">
